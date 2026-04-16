@@ -1,0 +1,7 @@
+{
+    "language": "fr",
+    "word_search_apis": [
+        "https://tatoeba.org/es/sentences/search?from=ell&query={}&to=eng",
+        "https://www.google.com/search?q={}&sca_esv=7ad34c0762c8b01c&hl=EN&sxsrf=AE3TifOe6ARQadD_rBvCyJwZBKrIzebl3w:1767766549693&source=hp&biw=1396&bih=762&ei=FfpdaeKwKKO0hbIPx9ek6AQ&iflsig=AOw8s4IAAAAAaV4IJba54zqXN3cdP-KJgRfPAVKTgQVM&ved=0ahUKEwiij_TJ4_iRAxUjWkEAHccrCU0Q4dUDCBc&uact=5&oq=dog&gs_lp=EgNpbWciA2RvZzILEAAYgAQYsQMYgwEyBRAAGIAEMgUQABiABDILEAAYgAQYsQMYgwEyCxAAGIAEGLEDGIMBMgUQABiABDIIEAAYgAQYsQMyBRAAGIAEMgUQABiABDIFEAAYgARIgBZQ4QxY0g5wAXgAkAEAmAFvoAHBAqoBAzAuM7gBA8gBAPgBAYoCC2d3cy13aXotaW1nmAIEoALXAqgCCsICChAjGCcYyQIY6gLCAgcQIxgnGMkCwgIOEAAYgAQYsQMYgwEYigWYAwuSBwMxLjOgB8gQsgcDMC4zuAfLAsIHBzAuMy4wLjHIBxCACAA&sclient=img&udm=2"
+    ]
+}
