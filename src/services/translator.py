@@ -6,7 +6,7 @@ from src.services.service import Service
 
 class Translator(Service):
 
-    def __init__(self, source_language: LanguageISO, target_language: LanguageISO) -> None:
+    def __init__(self, source_language: LanguageISO, target_language: LanguageISO = "auto") -> None:
         self.source_language = source_language
         self.target_language = target_language
         self.google_translator = GoogleTranslator(source=source_language, target=target_language)

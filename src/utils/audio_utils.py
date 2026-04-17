@@ -1,8 +1,15 @@
+import threading
 from typing import Iterable
-import elevenlabs
 
-def play_audio(audio: bytes) -> None:
-    elevenlabs.play(audio)
+from elevenlabs.play import play
+
+
+def play_audio(audio: bytes, block: bool = True) -> None:
+    if block:
+        play(audio)
+    else:
+        threading.Thread(target=play, args=(audio,)).start()
+
 
 def stream_to_bytes(audio) -> bytes:
     if isinstance(audio, (bytes, bytearray)):
@@ -16,3 +23,11 @@ def stream_to_bytes(audio) -> bytes:
         return bytes(data)
 
     raise TypeError("Audio is not bytes or iterable of bytes")
+
+
+def save_last_audio():
+    audio_path = Path(AUDIO_FILE_PATH.format(word=last_word, content=str(time())))
+
+    create_directory(audio_path.parent)
+    write_to_file(audio_path, last_audio)
+    open_file_explorer(audio_path.parent)

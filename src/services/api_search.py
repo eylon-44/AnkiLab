@@ -4,7 +4,7 @@ from httpx import URL
 from src.services.service import Service
 
 
-class APISearch(Service):
+class APIService(Service):
 
     def __init__(self, api_url: str):
         self._api_url = api_url
