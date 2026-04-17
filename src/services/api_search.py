@@ -1,7 +1,10 @@
 import webbrowser
 from httpx import URL
 
-class APISearch:
+from src.services.service import Service
+
+
+class APISearch(Service):
 
     def __init__(self, api_url: str):
         self._api_url = api_url
@@ -12,12 +15,12 @@ class APISearch:
     def __repr__(self):
         return self.__str__()
 
+    def _get_url(self, value: str) -> str:
+        return self._api_url.format(value)
+
     @property
     def host(self):
         return URL(self._api_url).host
 
-    def get_url(self, value: str) -> str:
-        return self._api_url.format(value)
-
-    def open_in_browser(self, value: str) -> None:
-        webbrowser.open(self.get_url(value))
+    def query(self, query: str) -> None:
+        webbrowser.open(self._get_url(query))
