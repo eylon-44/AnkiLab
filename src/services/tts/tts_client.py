@@ -22,11 +22,14 @@ class TTSClient(Service):
         self.voice_settings = voice_settings
 
     @classmethod
-    def from_configuration(cls: Self, configuration: Configuration) -> Self:
+    def from_configuration(cls, configuration: Configuration) -> Self:
         return cls(
-            api_key=configuration.tts.eleven_labs.api_key,
+            api_key=configuration.tts.api_key,
             language=configuration.langauge,
-            output_format=configuration.tts.eleven_labs.output_format
+            voice=configuration.tts.voice,
+            model_id=configuration.tss.model_id,
+            output_format=configuration.tts.output_format,
+            voice_settings=configuration.tss.voice_settings
         )
 
     def query(self, query: str) -> bytes:
@@ -35,6 +38,7 @@ class TTSClient(Service):
             voice_id=self.voice,
             model_id=self.model_id,
             output_format=self.output_format,
-            voice_settings=self.voice_settings
+            voice_settings=self.voice_settings,
+            language_code=self.language
         )
         return stream_to_bytes(audio_stream)
