@@ -4,6 +4,7 @@ from elevenlabs import VoiceSettings
 from pydantic import BaseModel, Field
 
 from src.datatypes.language_iso import LanguageISO
+from src.services.api_search import APIService
 from src.services.tts.tts_voices import TTSVoice
 
 
@@ -15,8 +16,7 @@ class TTSConfiguration(BaseModel):
     voice_settings: VoiceSettings = Field(default_factory=VoiceSettings)
     output_directory: Path = Field(default=Path("anki-lab-media"))
 
-
 class Configuration(BaseModel):
     language: LanguageISO
-    services_apis: list[str]
+    api_services: list[APIService]
     tts: TTSConfiguration = Field(default_factory=TTSConfiguration)

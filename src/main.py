@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 
 from src.configuration import Configuration
+from src.services import service
 from src.services.api_search import APIService
 from src.services.service import Service
 from src.services.translator import Translator
@@ -14,11 +15,8 @@ def get_configuration() -> Configuration:
 
 
 def get_services(configuration: Configuration) -> list[Service]:
-    services: list[Service] = [
-        Translator(configuration.language),
-        TTSClient.from_configuration(configuration)
-    ]
-    services.extend(APIService(api) for api in configuration.services_apis)
+    services: list[Service] = configuration.api_services
+    services.append(TTSClient.from_configuration(configuration))
     return services
 
 
@@ -31,7 +29,7 @@ def get_user_input(prompt: str = "> ") -> str | None:
             return user_input
 
 
-def query_services(services: list[Service], query: str):
+def query_services(services: list[Service], translator_service: Service, query: str):
     results = []
     for service in services:
         results.append(service.query(query))
@@ -40,14 +38,19 @@ def query_services(services: list[Service], query: str):
 
 def main():
     configuration = get_configuration()
-    services = get_services(configuration)
+    api_services: list[APIService] = configuration.api_services
+    translator_service = Translator(configuration.language)
+    tts_service = TTSClient.from_configuration(configuration)
 
     while True:
-        user_input = get_user_input()
-        if not user_input:
+        search_value = get_user_input()
+        if not search_value:
             break
-        results = query_services(services, user_input)
-        print(results)
+
+        translated_search_value = translator_service.query(search_value)
+        for api_service in api_services:
+            api_service.query(translated_search_value if api_service.use_translation else search_value)
+        tts_service.query(search_value)
 
 
 if __name__ == "__main__":
