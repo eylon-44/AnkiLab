@@ -31,5 +31,13 @@
       "name": "Native Pronunciation",
       "url": "https://youglish.com/pronounce/{}/french/fr"
     }
-  ]
+  ],
+  "tts": {
+    "voice_settings": {
+      "speed": 0.8,
+      "stability": 1,
+      "similarity_boost": 0.8,
+      "style": 0
+    }
+  }
 }

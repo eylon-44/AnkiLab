@@ -50,7 +50,7 @@ def main():
         translated_search_value = translator_service.query(search_value)
         for api_service in api_services:
             api_service.query(translated_search_value if api_service.use_translation else search_value)
-        tts_service.query(search_value)
+        tts_service.query(search_value + "." if not search_value.endswith(".") else "")
 
 
 if __name__ == "__main__":
